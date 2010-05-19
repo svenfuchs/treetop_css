@@ -1,0 +1,24 @@
+grammar CSS
+  include CSSSelector
+  include CSSDeclaration
+  
+  rule stylesheet
+    (ruleset / media)*
+  end
+  
+  rule media
+     s? '@media' media_list '{' ruleset* '}' s?
+  end
+  
+  rule media_list
+    s? medium ( s? ',' s? medium )* s? 
+  end
+  
+  rule medium
+    (identifier / '(' s declaration s ')' ) s? (medium)* s
+  end
+  
+  rule ruleset
+    s? selector ( s? ',' s? selector)* s? '{' s? ( declaration s? )* '}' s?
+  end
+end

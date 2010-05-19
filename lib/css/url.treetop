@@ -1,0 +1,44 @@
+# TODO replace with http://labs.apache.org/webarch/uri/rev-2002/rfc2396bis.html#collected-abnf
+
+grammar URL
+  rule url
+    protocol_with_suffix? domain_with_optional_port path?
+  end
+
+  rule protocol_with_suffix
+    protocol '://'
+  end
+
+  rule domain_with_optional_port
+    domain (':' port_number)?
+  end
+
+  rule port_number
+    positive_number
+  end
+
+  rule domain
+    [a-zA-Z0-9\-\._\/]+
+  end
+
+  rule path
+    '/' path_character* query_string?
+  end
+  
+  rule path_character
+    [a-zA-Z0-9\-\._~]
+  end
+
+  rule query_string
+    '?' url_key_value_pair (('&' url_key_value_pair)+)?
+  end
+
+  rule url_key_value_pair
+    string '=' string
+  end
+
+  rule protocol
+    'https' / 'http' / 'ftp' / 'gopher' / 'mailto' / 'news' / 'nntp' /
+    'telnet' / 'wais' / 'file' / 'prospero'
+  end
+end

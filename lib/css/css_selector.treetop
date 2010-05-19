@@ -1,0 +1,47 @@
+grammar CSSSelector
+  include CSSExpression
+  
+  rule selector
+    simple_selector s? combinator? s? selector?
+  end
+  
+  rule simple_selector
+    tag_selector / property_selector+
+  end
+  
+  rule tag_selector
+    tag_name property_selector*
+  end
+  
+  rule property_selector
+    hash / class / attrib / pseudo
+  end
+  
+  rule hash
+    '#'
+  end
+  
+  rule class
+    '.' identifier
+  end
+  
+  rule attrib
+    '[' s identifier s ( match_operator s ( identifier / string ) s)? ']'
+  end
+  
+  rule match_operator
+    '=' / '~=' / '|='
+  end
+  
+  rule pseudo
+    ':' ( function / identifier)  
+  end
+  
+  rule tag_name
+    identifier / '*'
+  end
+  
+  rule combinator
+    '+' / '>' / '*' / '~'
+  end
+end

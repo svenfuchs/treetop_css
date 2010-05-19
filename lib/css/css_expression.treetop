@@ -1,0 +1,23 @@
+grammar CSSExpression
+  include CSSPrimitives
+  
+  rule expression
+    term (operator? term)*
+  end
+  
+  rule term
+    quoted_string / function / primitive_data / string / number / identifier
+  end
+  
+  rule identifier
+    [-]? [_a-zA-Z]+ [_a-zA-Z0-9-]*
+  end
+  
+  rule function
+    identifier ( [:.] identifier )* '(' [^)]* ')'
+  end
+  
+  rule operator
+    s ('/' / ',' / '=') s
+  end
+end
