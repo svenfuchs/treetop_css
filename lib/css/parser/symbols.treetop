@@ -1,0 +1,29 @@
+grammar Symbols
+  rule symbol
+    semicolon / colon / sign / space
+  end
+
+  rule semicolon
+    ';'
+  end
+
+  rule colon
+    ':'
+  end
+
+  rule sign
+    '+' / '-'
+  end
+  
+  rule percent
+    '%'
+  end
+
+  rule space
+    ' '
+  end
+  
+  rule q
+    '"' / "'"
+  end
+end

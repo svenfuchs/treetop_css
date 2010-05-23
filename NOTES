@@ -1,0 +1,39 @@
+h1 {
+  margin: 10px 0;
+}
+
+1. get all rulesets
+2. for each ruleset get all properties
+3. for each property get all values
+
+class Stylesheet
+  def rulesets
+  end
+end
+
+class Ruleset
+  def selectors
+  end
+  
+  def properties
+  end
+end
+
+class Property
+  def name
+  end
+  
+  def value
+  end
+end
+
+class ShorthandProperty < Property
+  def expanded_properties
+  end
+end
+
+class FontProperty < ShorthandProperty
+end
+
+class DimensionProperty < ShorthandProperty
+end

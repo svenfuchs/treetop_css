@@ -1,0 +1,31 @@
+grammar Stylesheet
+  include Selector
+  
+  rule stylesheet
+    (ruleset / media)* <Css::Stylesheet>
+  end
+  
+  rule ruleset
+    selectors '{' declaration '}' s
+  end
+  
+  rule selectors
+    selector ( s ',' s selector)* s
+  end
+  
+  rule media
+     s '@media' media_list '{' ruleset* '}' s
+  end
+  
+  rule media_list
+    s medium ( s ',' s medium )* s 
+  end
+  
+  rule medium
+    (identifier / '(' s [^)]* s ')' ) s (medium)* s
+  end
+  
+  rule declaration
+    s [^}]*
+  end
+end

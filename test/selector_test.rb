@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class CssSelectorParserTest < Test::Unit::TestCase
-  PARSER = CSSSelectorParser
+  PARSER = SelectorParser
   
   test "selector" do
     assert_parses *%w(

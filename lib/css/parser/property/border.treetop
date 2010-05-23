@@ -1,0 +1,40 @@
+grammar BorderProperty
+  include Primitives
+  
+  rule border_property
+    name:border_property_name s ':' s property_value:border_value_list s property_priority s (';' s)* <Css::Property::Border>
+  end
+  
+  rule border_property_name
+    'border-width' / 'border-color' / 'border-style' / 
+    'border-top' / 'border-right' / 'border-bottom' / 'border-left' / 
+    'border'
+  end
+  
+  rule border_value_list
+    border_value border_value? border_value? border_value?
+  end
+  
+  rule border_value
+    border_width / border_color / border_style
+  end
+  
+  rule border_width
+    border_width_value s border_width_value s border_width_value s border_width_value s /
+    border_width_value s border_width_value s border_width_value s /
+    border_width_value s border_width_value s /
+    border_width_value s <Css::Property::Rectangle>
+  end
+  
+  rule border_width_value
+    length / 'thin' / 'medium' / 'thick'
+  end
+  
+  rule border_color
+    color s
+  end
+  
+  rule border_style
+    '' border_style:('none' / 'hidden' / 'dotted' / 'dashed' / 'solid' / 'double' / 'groove' / 'ridge' / 'inset' / 'outset') s
+  end
+end

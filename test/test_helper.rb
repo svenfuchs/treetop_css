@@ -1,4 +1,4 @@
-$: << File.expand_path('../../lib', __FILE__)
+$:.unshift File.expand_path('../../lib', __FILE__)
 
 require 'rubygems'
 require 'test/unit'
@@ -28,7 +28,9 @@ class Test::Unit::TestCase
 
   def assert_parses(*strings)
     strings.each do |string| 
-      css = self.class::PARSER.new.parse(string)
+      parser = self.class::PARSER.new
+      css = parser.parse(string)
+      # p parser.failure_reason
       assert(css, "could not parse #{truncate(string).inspect}")
       assert_equal(string, css.text_value)
     end

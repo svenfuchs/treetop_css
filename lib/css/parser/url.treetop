@@ -14,7 +14,7 @@ grammar URL
   end
 
   rule port_number
-    positive_number
+    positive_integer
   end
 
   rule domain

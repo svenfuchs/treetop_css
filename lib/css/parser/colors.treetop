@@ -1,12 +1,12 @@
-grammar CSSColor
+grammar Colors
   rule color
-    color_keyword / hex_value / rgb
+    (color_keyword / hex_value / rgb)
   end
 
   rule color_keyword
     'aqua' / 'black' / 'blue' / 'fuchsia' / 'gray' / 'green' / 'lime' / 
     'maroon' / 'navy' / 'olive' / 'purple' / 'red' / 'silver' / 'teal' / 
-    'white' / 'yellow'
+    'white' / 'yellow' / 'transparent'
   end
 
   rule rgb
@@ -18,7 +18,7 @@ grammar CSSColor
   end
 
   rule two_fifty_six_color
-    number
+    integer
   end
 
   rule hex_value

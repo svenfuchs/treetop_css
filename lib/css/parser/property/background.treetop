@@ -1,0 +1,55 @@
+grammar BackgroundProperty
+  include Primitives
+  
+  rule background_property
+    name:background_property_name s ':' s 
+    property_value:background_property_list s 
+    property_priority s (';' s)* <Css::Property::Background>
+  end
+  
+  rule background_property_name
+    'background-color' / 'background-image' / 'background-repeat' / 
+    'background-attachment' / 'background-position' / 'background'
+  end
+  
+  rule background_property_list
+    background_value background_value? background_value? 
+    background_value? background_value? background_value?
+  end
+  
+  rule background_value
+    background_color / background_image / background_repeat / 
+    background_attachment / background_position
+  end
+  
+  rule background_color
+    color s
+  end
+  
+  rule background_image
+    uri s
+  end
+  
+  rule background_repeat
+    '' background_repeat:('repeat-x' / 'repeat-y' / 'no-repeat' / 'repeat') s
+  end
+  
+  rule background_attachment
+    '' background_attachment:('scroll' / 'fixed') s
+  end
+  
+  rule background_position
+    background_horizontal_position s / 
+    background_vertical_position s /
+    (background_horizontal_position s background_vertical_position s) /
+    (background_vertical_position s background_horizontal_position s)
+  end
+  
+  rule background_horizontal_position
+    percentage / length / 'left' / 'center' / 'right'
+  end
+  
+  rule background_vertical_position
+    percentage / length / 'top' / 'center' / 'bottom'
+  end
+end

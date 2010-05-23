@@ -1,0 +1,27 @@
+grammar Properties
+  include Primitives
+  include BackgroundProperty
+  include BorderProperty
+  include FontProperty
+  include RectangleProperty
+
+  rule properties
+    (font_property / font_family_property / background_property / border_property / rectangle_property / property)*
+  end
+
+  rule property
+    property_name s ':' s property_value s property_priority s (';' s)* <Css::Property>
+  end
+
+  rule property_value
+    function / quoted_string / identifier / primitive
+  end
+
+  rule property_name
+    '*'? s identifier
+  end
+
+  rule property_priority
+    '!important'?
+  end
+end

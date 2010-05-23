@@ -1,0 +1,23 @@
+grammar RectangleProperty
+  include Primitives
+  
+  rule rectangle_property
+    name:rectangle_property_name s ':' s property_value:rectangle s property_priority s (';' s)* <Css::Property::Rectangle>
+  end
+
+  rule rectangle_property_name
+    'margin' / 'padding'
+  end
+  
+  rule rectangle
+    rectangle_value s rectangle_value s rectangle_value s rectangle_value s /
+    rectangle_value s rectangle_value s rectangle_value s /
+    rectangle_value s rectangle_value s /
+    rectangle_value s <Css::Property::Rectangle>
+  end
+  
+  rule rectangle_value
+    length / percentage / signed_number
+  end
+  
+end

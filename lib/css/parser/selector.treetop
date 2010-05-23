@@ -1,12 +1,12 @@
-grammar CSSSelector
-  include CSSExpression
+grammar Selector
+  include Primitives
   
   rule selector
-    simple_selector s? combinator? s? selector?
+    simple_selector s combinator? s selector?
   end
   
   rule simple_selector
-    tag_selector / property_selector+
+    s (tag_selector / property_selector+)
   end
   
   rule tag_selector

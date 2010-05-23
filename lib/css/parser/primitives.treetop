@@ -1,0 +1,86 @@
+grammar Primitives
+  include Symbols
+  include Units
+  include URL
+  include Colors
+
+  rule primitive
+    uri / size / percentage / color / angle / time / frequency / signed_number / string
+  end
+  
+  rule uri
+    'url(' q? url q? ')' <Css::Primitive>
+  end
+  
+  rule size
+    signed_number length_unit <Css::Primitive>
+  end
+  
+  rule length
+    signed_number length_unit <Css::Primitive>
+  end
+  
+  rule percentage
+    signed_number percent <Css::Primitive>
+  end
+  
+  rule angle
+    signed_number angle_unit <Css::Primitive>
+  end
+  
+  rule time
+    positive_number time_unit <Css::Primitive>
+  end
+  
+  rule frequency
+    positive_number frequency_unit <Css::Primitive>
+  end
+  
+  rule signed_number
+    sign? number <Css::Number>
+  end
+  
+  rule number
+    (float / integer)
+  end
+  
+  rule positive_number
+    (positive_float / positive_integer)
+  end
+  
+  rule integer
+    sign? positive_integer
+  end
+
+  rule positive_integer
+    '+'? [0-9]+ <Css::Number>
+  end
+
+  rule float
+    integer '.' integer
+  end
+
+  rule positive_float
+    '+'? positive_integer '.' positive_integer <Css::Number>
+  end
+
+  rule function
+    identifier ( [:.] identifier )* '(' [^)]* ')'
+  end
+
+  rule identifier
+    [-]? [_a-zA-Z]+ [_a-zA-Z0-9-]*
+  end
+  
+  rule quoted_string
+    q [^"']* q
+  end
+
+  rule string
+    [a-zA-Z\.\/]+
+  end
+  
+  rule s
+    [ \r\n\t]*
+  end
+end

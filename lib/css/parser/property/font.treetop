@@ -1,0 +1,56 @@
+grammar FontProperty
+  include Primitives
+  
+  rule font_property
+    name:'font' s ':' s property_value:font_value_list property_priority s (';' s)* <Css::Property::Font>
+  end
+
+  rule font_family_property
+    name:'font-family' s ':' s property_value:font_family_list s property_priority s (';' s)* <Css::Property>
+  end
+
+  rule font_value_list
+    font_value (s font_value)* (s font_value)* (s font_value)* (s font_value)*
+  end
+  
+  rule font_family_list
+    font_family (s ',' s font_family)* {
+      def value; font_family_list.text_value; end
+    }
+  end
+  
+  rule font_value
+    font_weight / font_style / font_variant / font_size ('/' line_height)? / font_family_list
+  end
+
+  rule font_family
+    q? [a-zA-Z0-9\-_ ]+ q?
+  end
+  
+  rule font_size
+    size / percentage / 'normal' / 'larger' / 'smaller' / 'xx-small' / 
+    'x-small' / 'small' / 'medium' / 'large' / 'x-large' / 'xx-large'
+  end
+  
+  rule line_height
+    size / percentage / 'normal'
+  end
+  
+  rule font_weight
+    integer / 'normal' / 'bold' / 'bolder'
+  end
+  
+  rule font_style
+    'normal' / 'italic' / 'oblique'
+  end
+  
+  rule font_variant
+    'normal' / 'small-caps'
+  end
+  
+  rule font_stretch
+    'normal' / 'wider' / 'narrower' / 'ultra-condensed' / 'extra-condensed' / 
+    'condensed' / 'semi-condensed' / 'semi-expanded' / 'expanded' / 
+    'extra-expanded' / 'ultra-expanded'
+  end
+end
